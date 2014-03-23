@@ -39,6 +39,8 @@ namespace chess{
 
 	class Board{
 		public:
+			int blackKing_x, blackKing_y;
+			int whiteKing_x, whiteKing_y;
 			Position position[8][8];
 		
 			/* Reset board (To chess default) */

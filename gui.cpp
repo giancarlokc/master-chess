@@ -481,6 +481,10 @@ namespace gui{
 				mvprintw(1, 60, "Move selected!");
 			}
 			
+			/* Position of the Kings */
+			mvprintw(6, 50, "Black king: [%d,%d]", b.blackKing_x, b.blackKing_y);
+			mvprintw(7, 50, "White king: [%d,%d]", b.whiteKing_x, b.whiteKing_y);
+			
 			refresh();
 			int cmd = getch();
 //			printw("%d", cmd);

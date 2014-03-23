@@ -58,6 +58,8 @@ namespace chess{
 		position[0][5].piece = BISHOP;
 		position[0][3].piece = QUEEN;
 		position[0][4].piece = KING;
+		blackKing_x = 0;
+		blackKing_y = 4;
 		
 		position[7][0].piece = TOWER;
 		position[7][7].piece = TOWER;
@@ -67,6 +69,8 @@ namespace chess{
 		position[7][5].piece = BISHOP;
 		position[7][3].piece = QUEEN;
 		position[7][4].piece = KING;
+		whiteKing_x = 7;
+		whiteKing_y = 4;
 		
 	}
 	
@@ -413,17 +417,17 @@ namespace chess{
 		
 		// Check for possible PAWN threats
 		if(myColor == BLACK){
-			if(!position[lin+1][col+1].empty && position[lin+1][col+1].piece == PAWN && position[lin+1][col+1].color != myColor){
+			if(lin+1 < 8 && col+1 < 8 && !position[lin+1][col+1].empty && position[lin+1][col+1].piece == PAWN && position[lin+1][col+1].color != myColor){
 				return false;
 			}
-			if(!position[lin+1][col-1].empty && position[lin+1][col-1].piece == PAWN && position[lin+1][col+1].color != myColor){
+			if(lin+1 < 8 && col-1 >= 0 && !position[lin+1][col-1].empty && position[lin+1][col-1].piece == PAWN && position[lin+1][col+1].color != myColor){
 				return false;
 			}
 		} else {
-			if(!position[lin-1][col+1].empty && position[lin-1][col+1].piece == PAWN && position[lin-1][col+1].color != myColor){
+			if(lin-1 >= 0 && col+1 < 8 && !position[lin-1][col+1].empty && position[lin-1][col+1].piece == PAWN && position[lin-1][col+1].color != myColor){
 				return false;
 			}
-			if(!position[lin-1][col-1].empty && position[lin-1][col-1].piece == PAWN && position[lin-1][col+1].color != myColor){
+			if(lin-1 >= 0 && col-1 >= 0 && !position[lin-1][col-1].empty && position[lin-1][col-1].piece == PAWN && position[lin-1][col+1].color != myColor){
 				return false;
 			}
 		}
@@ -435,7 +439,7 @@ namespace chess{
 		}
 		if(i >= 0 && (position[lin][i].piece == QUEEN || position[lin][i].piece == TOWER || (position[lin][i].piece == KING && col-i == 1)) && position[lin][i].color != myColor)
 			return false;
-			
+		
 		i=col+1;
 		while(i < 8 && position[lin][i].empty){
 			i++;
@@ -504,6 +508,13 @@ namespace chess{
 			if(position[lin_final][col_final].empty || position[lin_final][col_final].color != position[lin][col].color){
 				if(safeKing(lin_final, col_final, position[lin][col].color)){
 					position[lin_final][col_final] = position[lin][col];
+					if(position[lin][col].color == BLACK){
+						blackKing_x = lin_final;
+						blackKing_y = col_final;
+					} else {
+						whiteKing_x = lin_final;
+						whiteKing_y = col_final;
+					}
 					position[lin][col].empty = true;
 					return true;
 				}
