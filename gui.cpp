@@ -481,6 +481,12 @@ namespace gui{
 				mvprintw(1, 60, "Move selected!");
 			}
 			
+			if(b.safeKing(b.blackKing_x, b.blackKing_y, BLACK) == false){
+				mvprintw(4, 50, "Check on BLACK king!");
+			} else if(b.safeKing(b.whiteKing_x, b.whiteKing_y, WHITE) == false){
+				mvprintw(4, 50, "Check on WHITE king!");
+			}
+			
 			/* Position of the Kings */
 			mvprintw(6, 50, "Black king: [%d,%d]", b.blackKing_x, b.blackKing_y);
 			mvprintw(7, 50, "White king: [%d,%d]", b.whiteKing_x, b.whiteKing_y);

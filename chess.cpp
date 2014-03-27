@@ -415,6 +415,25 @@ namespace chess{
 	bool Board::safeKing(int lin, int col, int myColor){
 		int i;
 		
+		// Check for possible HORSE threats
+		if(lin+1 < 8 && col+2 < 8 && position[lin+1][col+2].piece == HORSE && position[lin+1][col+2].color != myColor && position[lin+1][col+2].empty == false){
+			return false;
+		} else if(lin+1 < 8 && col-2 >= 0 && position[lin+1][col-2].piece == HORSE && position[lin+1][col-2].color != myColor && position[lin+1][col-2].empty == false){
+			return false;
+		} else if(lin-1 >= 0 && col+2 < 8 && position[lin-1][col+2].piece == HORSE && position[lin-1][col+2].color != myColor && position[lin-1][col+2].empty == false){
+			return false;
+		} else if(lin-1 >= 0 && col-2 >= 0 && position[lin-1][col-2].piece == HORSE && position[lin-1][col-2].color != myColor && position[lin-1][col-2].empty == false){
+			return false;
+		} else if(lin+2 < 8 && col+1 < 8 && position[lin+2][col+1].piece == HORSE && position[lin+2][col+1].color != myColor && position[lin+2][col+1].empty == false){
+			return false;
+		} else if(lin+2 < 8 && col-1 >= 0 && position[lin+2][col-1].piece == HORSE && position[lin+2][col-1].color != myColor && position[lin+2][col-1].empty == false){
+			return false;
+		} else if(lin-2 >= 0 && col+1 < 8 && position[lin-2][col+1].piece == HORSE && position[lin-2][col+1].color != myColor && position[lin-2][col+1].empty == false){
+			return false;
+		} else if(lin-2 >= 0 && col-1 >= 0 && position[lin-2][col-1].piece == HORSE && position[lin-2][col-1].color != myColor && position[lin-2][col-1].empty == false){
+			return false;
+		}
+		
 		// Check for possible PAWN threats
 		if(myColor == BLACK){
 			if(lin+1 < 8 && col+1 < 8 && !position[lin+1][col+1].empty && position[lin+1][col+1].piece == PAWN && position[lin+1][col+1].color != myColor){
@@ -521,6 +540,6 @@ namespace chess{
 			}
 		}
 		
-		return true;
+		return false;
 	}
 }
