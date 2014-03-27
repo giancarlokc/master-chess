@@ -362,6 +362,44 @@ namespace gui{
 				mvprintw(4 + lin-i, 7 + (col-i)*4, " ");
 				mvprintw(4 + lin-i, 9 + (col-i)*4, " ");
 			}
+		} else if(b.position[lin][col].piece == KING){
+			attron(COLOR_PAIR(5));
+			
+			if(lin+1 < 8 && b.safeKing(lin+1, col, b.position[lin][col].color) == true && (b.position[lin+1][col].empty || b.position[lin+1][col].color != b.position[lin][col].color)){
+				mvprintw(4 + lin+1, 7 + (col)*4, " ");
+				mvprintw(4 + lin+1, 9 + (col)*4, " ");
+			}
+			if(lin+1 < 8 && col+1 < 8 && b.safeKing(lin+1, col+1, b.position[lin][col].color) == true && (b.position[lin+1][col+1].empty || b.position[lin+1][col+1].color != b.position[lin][col].color)){
+				mvprintw(4 + lin+1, 7 + (col+1)*4, " ");
+				mvprintw(4 + lin+1, 9 + (col+1)*4, " ");
+			}
+			if(lin+1 < 8 && col-1 >= 0 && b.safeKing(lin+1, col-1, b.position[lin][col].color) == true && (b.position[lin+1][col-1].empty || b.position[lin+1][col-1].color != b.position[lin][col].color)){
+				mvprintw(4 + lin+1, 7 + (col-1)*4, " ");
+				mvprintw(4 + lin+1, 9 + (col-1)*4, " ");
+			}
+			
+			if(col+1 >= 0 && b.safeKing(lin, col+1, b.position[lin][col].color) == true && (b.position[lin][col+1].empty || b.position[lin][col+1].color != b.position[lin][col].color)){
+				mvprintw(4 + lin, 7 + (col+1)*4, " ");
+				mvprintw(4 + lin, 9 + (col+1)*4, " ");
+			}
+			if(col-1 >= 0 && b.safeKing(lin, col-1, b.position[lin][col].color) == true && (b.position[lin][col-1].empty || b.position[lin][col-1].color != b.position[lin][col].color)){
+				mvprintw(4 + lin, 7 + (col-1)*4, " ");
+				mvprintw(4 + lin, 9 + (col-1)*4, " ");
+			}
+			
+			
+			if(lin-1 >= 0 && b.safeKing(lin-1, col, b.position[lin][col].color) == true && (b.position[lin-1][col].empty || b.position[lin-1][col].color != b.position[lin][col].color)){
+				mvprintw(4 + lin-1, 7 + (col)*4, " ");
+				mvprintw(4 + lin-1, 9 + (col)*4, " ");
+			}
+			if(lin-1 >= 0 && col+1 >= 0 && b.safeKing(lin-1, col+1, b.position[lin][col].color) == true && (b.position[lin-1][col+1].empty || b.position[lin-1][col+1].color != b.position[lin][col].color)){
+				mvprintw(4 + lin-1, 7 + (col+1)*4, " ");
+				mvprintw(4 + lin-1, 9 + (col+1)*4, " ");
+			}
+			if(lin-1 >= 0 && col-1 >= 0 && b.safeKing(lin-1, col-1, b.position[lin][col].color) == true && (b.position[lin-1][col-1].empty || b.position[lin-1][col-1].color != b.position[lin][col].color)){
+				mvprintw(4 + lin-1, 7 + (col-1)*4, " ");
+				mvprintw(4 + lin-1, 9 + (col-1)*4, " ");
+			}
 		}
 		
 		attron(COLOR_PAIR(1));
@@ -485,6 +523,12 @@ namespace gui{
 				mvprintw(4, 50, "Check on BLACK king!");
 			} else if(b.safeKing(b.whiteKing_x, b.whiteKing_y, WHITE) == false){
 				mvprintw(4, 50, "Check on WHITE king!");
+			}
+			
+			if(b.checkMate(BLACK)){
+				mvprintw(12, 50, "Check MATE on BLACK king!");
+			} else if(b.checkMate(WHITE)){
+				mvprintw(12, 50, "Check MATE on WHITE king!");
 			}
 			
 			/* Position of the Kings */

@@ -56,6 +56,8 @@ namespace chess{
 			bool moveBishop(int, int, int, int);
 			bool moveQueen(int, int, int, int);
 			bool moveKing(int, int, int, int);
+			
+			bool checkMate(int);
 	};
 }
 

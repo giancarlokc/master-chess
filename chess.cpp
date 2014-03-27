@@ -16,7 +16,7 @@
 // ********************************************************************* //
 
 #include "chess.h"
-
+#include <ncurses.h>
 #include <iostream>
 
 using namespace std;
@@ -541,5 +541,147 @@ namespace chess{
 		}
 		
 		return false;
+	}
+	
+	bool Board::checkMate(int myColor){
+		if(myColor == WHITE && safeKing(whiteKing_x, whiteKing_y, myColor))
+			return false;
+		if(myColor == BLACK && safeKing(blackKing_x, blackKing_y, myColor))
+			return false;
+	
+		// For each piece of color == myColor
+		for(int i=0;i<8;i++){
+			for(int j=0;j<8;j++){
+				if(!position[i][j].empty && position[i][j].color == myColor){
+					// For each position
+					for(int a=0;a<8;a++){
+						for(int b=0;b<8;b++){
+							if(position[i][j].piece == PAWN){
+								Position init, end;
+								
+								init = position[i][j];
+								end = position[a][b];
+								if(movePawn(i, j, a, b)){
+									if(myColor == WHITE && safeKing(whiteKing_x, whiteKing_y, myColor)){
+										position[i][j] = init;
+										position[a][b] = end;
+										return false;	
+									}
+									if(myColor == BLACK && safeKing(blackKing_x, blackKing_y, myColor)){
+										position[i][j] = init;
+										position[a][b] = end;
+										return false;
+									}
+									position[i][j] = init;
+									position[a][b] = end;
+								}
+							}
+							if(position[i][j].piece == HORSE){
+								Position init, end;
+								
+								init = position[i][j];
+								end = position[a][b];
+								if(moveHorse(i, j, a, b)){
+									if(myColor == WHITE && safeKing(whiteKing_x, whiteKing_y, myColor)){
+										position[i][j] = init;
+										position[a][b] = end;
+										return false;	
+									}
+									if(myColor == BLACK && safeKing(blackKing_x, blackKing_y, myColor)){
+										position[i][j] = init;
+										position[a][b] = end;
+										return false;
+									}
+									position[i][j] = init;
+									position[a][b] = end;
+								}
+							}
+							if(position[i][j].piece == TOWER){
+								Position init, end;
+								
+								init = position[i][j];
+								end = position[a][b];
+								if(moveTower(i, j, a, b)){
+									if(myColor == WHITE && safeKing(whiteKing_x, whiteKing_y, myColor)){
+										position[i][j] = init;
+										position[a][b] = end;
+										return false;	
+									}
+									if(myColor == BLACK && safeKing(blackKing_x, blackKing_y, myColor)){
+										position[i][j] = init;
+										position[a][b] = end;
+										return false;
+									}
+									position[i][j] = init;
+									position[a][b] = end;
+								}
+							}
+							if(position[i][j].piece == BISHOP){
+								Position init, end;
+								
+								init = position[i][j];
+								end = position[a][b];
+								if(moveBishop(i, j, a, b)){
+									if(myColor == WHITE && safeKing(whiteKing_x, whiteKing_y, myColor)){
+										position[i][j] = init;
+										position[a][b] = end;
+										return false;	
+									}
+									if(myColor == BLACK && safeKing(blackKing_x, blackKing_y, myColor)){
+										position[i][j] = init;
+										position[a][b] = end;
+										return false;
+									}
+									position[i][j] = init;
+									position[a][b] = end;
+								}
+							}
+							if(position[i][j].piece == QUEEN){
+								Position init, end;
+								
+								init = position[i][j];
+								end = position[a][b];
+								if(moveQueen(i, j, a, b)){
+									if(myColor == WHITE && safeKing(whiteKing_x, whiteKing_y, myColor)){
+										position[i][j] = init;
+										position[a][b] = end;
+										return false;	
+									}
+									if(myColor == BLACK && safeKing(blackKing_x, blackKing_y, myColor)){
+										position[i][j] = init;
+										position[a][b] = end;
+										return false;
+									}
+									position[i][j] = init;
+									position[a][b] = end;
+								}
+							}
+							if(position[i][j].piece == KING){
+								Position init, end;
+								
+								init = position[i][j];
+								end = position[a][b];
+								if(moveKing(i, j, a, b)){
+									if(myColor == WHITE && safeKing(whiteKing_x, whiteKing_y, myColor)){
+										position[i][j] = init;
+										position[a][b] = end;
+										return false;
+									}
+									if(myColor == BLACK && safeKing(blackKing_x, blackKing_y, myColor)){
+										position[i][j] = init;
+										position[a][b] = end;
+										return false;
+									}
+									position[i][j] = init;
+									position[a][b] = end;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		return true;
 	}
 }
