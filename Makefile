@@ -15,8 +15,8 @@
 
 # ********************************************************************* #
 
-	PROG=chess
-	OBJS=main.cpp chess.cpp gui.cpp ai.cpp
+	PROG=bin/chess
+	OBJS=source/main.cpp source/chess.cpp source/gui.cpp source/ai.cpp
 	CC=g++
 	FLAGS=-lncurses
 	
@@ -24,4 +24,4 @@ all: $(OBJS)
 	$(CC) -o $(PROG) $(OBJS) $(FLAGS)
 	
 clean:
-	rm -rf *.o
+	rm -rf source/*.o
