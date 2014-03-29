@@ -1,0 +1,26 @@
+master-chess-online
+===================
+
+Classic online chess game for 2 player.
+
+The chess and interface function are from master-chess.
+
+Structure: (Using TCP for secure connection)
+	Server: (Stardard 8888 socket for connection)
+		Has to run first.
+		When 2 players connect the game beggins.
+		
+	Client:
+		Simply connect to server.
+		Then in the loop:
+			receives the current board.
+			sends his move.
+			
+			
+To run: (Currently only work in the same PC)
+
+	1. Start server: ./mvserver
+	2. Start player 1: ./mcclient [NAME]
+	3. Start player 2: ./mcclient [NAME]
+	
+If an error occours, it might be from a socket problem. This will be fixed in the future.
