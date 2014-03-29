@@ -1,3 +1,20 @@
+// Copyright 2013 Giancarlo Klemm Camilo
+
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// any later version.
+
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+// ********************************************************************* //
+
 #include "master-chess.h"
 #include <iostream>
 #include <string.h>
@@ -26,10 +43,23 @@ void *manage_connection(void *socket_desc){
 	cout << "HELLO";
 }
 
-int main(int argc, char **argv){
-	Interface t;
-	Board b;
+bool receiveBoard(Board *b, char *message){
+	int mesg_index = 0;
+
+	for(int i=0;i<8;i++){
+		for(int j=0;j<8;j++){
+			b->position[i][j].color = (int) message[mesg_index];
+			b->position[i][j].piece = (int) message[mesg_index+1];
+			b->position[i][j].empty = (int) message[mesg_index+2];
+			mesg_index+=3;
+		}
+	}
 	
+	return true;
+}
+
+int main(int argc, char **argv){
+
 	int sock, i;
 	struct sockaddr_in server;
 	char message[10000] , server_reply[20000];
@@ -53,19 +83,42 @@ int main(int argc, char **argv){
 		return 1;
 	}
 	
-	strcpy(message, "My Name");
-	if( send(sock , message , strlen(message) , 0) < 0)
-		{
-			cout << "Send failed";
-			return 1;
-		}
-		
-	if( recv(sock , server_reply , 10000 , 0) < 0) {
-	   	cout << "recv failed";
-			return 0;
-	   }
-	
-	cout << "Starting the game!\n";
+	strcpy(message, argv[1]);
+	write(sock , message , strlen(message));
 	
 	/***************************** START THE GAME HERE *****/
+	int read_size;
+	Board b;
+	Interface t;
+	
+	t.startBoard_nc(b);
+	int cursor_x = 0, cursor_y = 0, cursor_x_to = 0, cursor_y_to = 0;
+	
+	do{	
+		/* Receive board */
+		memset(server_reply, 0, sizeof(server_reply));
+		if(read_size = read(sock, server_reply, sizeof(server_reply)-1) < 0){
+			cout << "Read error\n";
+			return 1;
+		} else {
+			receiveBoard(&b, server_reply);
+		}
+		
+		/* Show board and get move */
+		t.showBoard_nc(b, &cursor_x, &cursor_y, &cursor_x_to, &cursor_y_to);
+		
+		/* Send move */
+		memset(message, 0, sizeof(message));
+		message[0] = (char) cursor_x;
+		message[1] = (char) cursor_x_to;
+		message[2] = (char) cursor_y;
+		message[3] = (char) cursor_y_to;
+		write(sock, message, 4);
+		
+		
+		
+	}while(strcmp(server_reply, "checkmate") != 0);
+	
+	cout << "CHECKMATE\n";
+	t.endBoard_nc(b);
 }
