@@ -91,10 +91,17 @@ int main(int argc, char **argv){
 	Board b;
 	Interface t;
 	
+	b.reset();
 	t.startBoard_nc(b);
 	int cursor_x = 0, cursor_y = 0, cursor_x_to = 0, cursor_y_to = 0;
 	
-	do{	
+	do{
+		int t_x = -1;
+		int t_x_to = -1;
+		int t_y = -1;
+		int t_y_to = -1;
+		t.showBoard_nc_onlyshow(b, &t_x, &t_y, &t_x_to, &t_y_to);
+	
 		/* Receive board */
 		memset(server_reply, 0, sizeof(server_reply));
 		if(read_size = read(sock, server_reply, sizeof(server_reply)-1) < 0){
@@ -104,8 +111,59 @@ int main(int argc, char **argv){
 			receiveBoard(&b, server_reply);
 		}
 		
+		cursor_x = 0;
+		cursor_x_to = 0;
+		cursor_y = 0;
+		cursor_y_to = 0;
 		/* Show board and get move */
 		t.showBoard_nc(b, &cursor_x, &cursor_y, &cursor_x_to, &cursor_y_to);
+		
+		int a, bb, a_f, b_f;
+		
+		a = cursor_y;
+		a_f = cursor_y_to;
+		
+		bb = cursor_x;
+		b_f = cursor_x_to;
+		
+//		cursor_x = cursor_x_to;
+//		cursor_y = cursor_y_to;
+	
+		if(!b.position[a][bb].empty && b.position[a][bb].piece == PAWN){
+			if(!b.movePawn(a, bb, a_f, b_f))
+				cout << "Invalid Move!";
+		}
+		
+		if(!b.position[a][bb].empty && b.position[a][bb].piece == HORSE){
+			if(!b.moveHorse(a, bb, a_f, b_f))
+				cout << "Invalid Move!";
+		}
+		
+		if(!b.position[a][bb].empty && b.position[a][bb].piece == TOWER){
+			if(!b.moveTower(a, bb, a_f, b_f))
+				cout << "Invalid Move!";
+		}
+		
+		if(!b.position[a][bb].empty && b.position[a][bb].piece == BISHOP){
+			if(!b.moveBishop(a, bb, a_f, b_f))
+				cout << "Invalid Move!";
+		}
+		
+		if(!b.position[a][bb].empty && b.position[a][bb].piece == QUEEN){
+			if(!b.moveQueen(a, bb, a_f, b_f))
+				cout << "Invalid Move!";
+		}
+		
+		if(!b.position[a][bb].empty && b.position[a][bb].piece == KING){
+			if(!b.moveKing(a, bb, a_f, b_f))
+				cout << "Invalid Move!";
+		}
+		
+		t_x = -1;
+		t_x_to = -1;
+		t_y = -1;
+		t_y_to = -1;
+		t.showBoard_nc_onlyshow(b, &t_x, &t_y, &t_x_to, &t_y_to);
 		
 		/* Send move */
 		memset(message, 0, sizeof(message));
@@ -114,6 +172,8 @@ int main(int argc, char **argv){
 		message[2] = (char) cursor_y;
 		message[3] = (char) cursor_y_to;
 		write(sock, message, 4);
+		
+		
 		
 		
 		

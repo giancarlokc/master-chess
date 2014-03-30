@@ -30,6 +30,7 @@ namespace gui{
 			void possibleMove(Board, int, int, int, int);
 			void endBoard_nc(Board b);
 			void showBoard_nc(Board, int*, int*, int*, int *);
+			void showBoard_nc_onlyshow(Board, int*, int*, int*, int *);
 	};
 }
 

@@ -588,4 +588,120 @@ namespace gui{
 		
 		return;
 	}
+	
+	void Interface::showBoard_nc_onlyshow(Board b, int *cursor_x, int *cursor_y, int *cursor_x_to, int *cursor_y_to){
+
+		bool chosedPiece = false;
+		bool chosedMove = false;
+		int c;
+
+		// Clear screen
+		clear();
+		
+		attron(COLOR_PAIR(1));
+		printw ("  ############### Computer ################\n\n");
+		printw ("        1   2   3   4   5   6   7   8 \n");
+		printw ("        !   !   !   !   !   !   !   !\n");
+		c = 'A';
+		for(int i=0;i<8;i++){
+			attron(COLOR_PAIR(1));
+			printw ("  %c --|", c);
+			for(int j=0;j<8;j++){
+				if(b.position[i][j].empty){
+					if(chosedPiece == false){
+						if(j == *cursor_x && i == *cursor_y){
+							attron(COLOR_PAIR(2));
+							printw ("   ");
+						} else {
+							attron(COLOR_PAIR(1));
+							printw ("   ");
+						}
+					} else {
+						if(j == *cursor_x_to && i == *cursor_y_to){
+							attron(COLOR_PAIR(2));	
+							printw ("   ");
+						} else {
+							attron(COLOR_PAIR(1));	
+							printw ("   ");
+						}
+					}
+					attron(COLOR_PAIR(1));
+					printw("|");
+				} else {
+			
+					if(b.position[i][j].color == BLACK){
+						attron(COLOR_PAIR(4));
+					} else {
+						attron(COLOR_PAIR(3));
+					}
+					if(chosedPiece == false){
+						if(j == *cursor_x && i == *cursor_y)
+							attron(COLOR_PAIR(2));
+					} else {
+						if(j == *cursor_x && i == *cursor_y)
+							attron(COLOR_PAIR(2));
+						if(j == *cursor_x_to && i == *cursor_y_to)
+							attron(COLOR_PAIR(2));
+					}
+			
+					printw (" ");
+					if(b.position[i][j].piece == KING){
+						printw ("K ");
+					} else if(b.position[i][j].piece == QUEEN){
+						printw ("Q ");
+					} else if(b.position[i][j].piece == BISHOP){
+						printw ("B ");
+					} else if(b.position[i][j].piece == HORSE){
+						printw ("H ");
+					} else if(b.position[i][j].piece == TOWER){
+						printw ("T ");
+					} else if(b.position[i][j].piece == PAWN){
+						printw ("P ");
+					}
+					attron(COLOR_PAIR(1));
+					printw("|");
+				}
+			}
+			attron(COLOR_PAIR(1));
+			printw ("-- %c", c);
+			c++;
+			printw ("\n");
+		}
+		printw ("        !   !   !   !   !   !   !   !\n");
+		printw ("        1   2   3   4   5   6   7   8 \n");
+		printw (" \n  ############## Player (You) #############\n\n");
+		
+		if(!chosedPiece == true){
+			mvprintw(0, 60, "Piece not selected!");
+		} else {
+			mvprintw(0, 60, "Piece selected!");
+			possibleMove(b, *cursor_y, *cursor_x, *cursor_y_to, *cursor_x_to);
+		}
+		
+		if(!chosedMove == true){
+			mvprintw(1, 60, "Move not selected!");
+		} else {
+			mvprintw(1, 60, "Move selected!");
+		}
+		
+		if(b.safeKing(b.blackKing_x, b.blackKing_y, BLACK) == false){
+			mvprintw(4, 50, "Check on BLACK king!");
+		} else if(b.safeKing(b.whiteKing_x, b.whiteKing_y, WHITE) == false){
+			mvprintw(4, 50, "Check on WHITE king!");
+		}
+		
+		if(b.checkMate(BLACK)){
+			mvprintw(12, 50, "Check MATE on BLACK king!");
+		} else if(b.checkMate(WHITE)){
+			mvprintw(12, 50, "Check MATE on WHITE king!");
+		}
+		
+		/* Position of the Kings */
+		mvprintw(6, 50, "Black king: [%d,%d]", b.blackKing_x, b.blackKing_y);
+		mvprintw(7, 50, "White king: [%d,%d]", b.whiteKing_x, b.whiteKing_y);
+		
+		refresh();
+	
+		return;
+	}
 }
