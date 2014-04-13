@@ -96,14 +96,44 @@ namespace chess{
 			if(col == col_final){
 				position[lin_final][col_final] = position[lin][col];
 				position[lin][col].empty = true;
-				return true;
+				if(position[lin][col].color == WHITE){
+					if(safeKing(whiteKing_x, whiteKing_y, WHITE))
+						return true;
+					else{
+						position[lin][col] = position[lin_final][col_final];
+						position[lin_final][col_final].empty = true;
+					}
+				} else {
+					if(safeKing(blackKing_x, blackKing_y, BLACK))
+						return true;
+					else{
+						position[lin][col] = position[lin_final][col_final];
+						position[lin_final][col_final].empty = true;
+					}
+				}
+				return false;
 			}
 		} else {
 			/* Valid Move */
 			if(col == col_final-1 || col == col_final+1){
 				position[lin_final][col_final] = position[lin][col];
 				position[lin][col].empty = true;
-				return true;
+				if(position[lin][col].color == WHITE){
+					if(safeKing(whiteKing_x, whiteKing_y, WHITE))
+						return true;
+					else{
+						position[lin][col] = position[lin_final][col_final];
+						position[lin_final][col_final].empty = true;
+					}
+				} else {
+					if(safeKing(blackKing_x, blackKing_y, BLACK))
+						return true;
+					else{
+						position[lin][col] = position[lin_final][col_final];
+						position[lin_final][col_final].empty = true;
+					}
+				}
+				return false;
 			}
 		}
 		
@@ -124,13 +154,43 @@ namespace chess{
 				if(position[lin_final][col_final].empty || position[lin_final][col_final].color != position[lin][col].color){
 					position[lin_final][col_final] = position[lin][col];
 					position[lin][col].empty = true;
-					return true;
+					if(position[lin][col].color == WHITE){
+						if(safeKing(whiteKing_x, whiteKing_y, WHITE))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					} else {
+						if(safeKing(blackKing_x, blackKing_y, BLACK))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					}
+					return false;
 				}
 			} else if(col_final == col-2){
 				if(position[lin_final][col_final].empty || position[lin_final][col_final].color != position[lin][col].color){
 					position[lin_final][col_final] = position[lin][col];
 					position[lin][col].empty = true;
-					return true;
+					if(position[lin][col].color == WHITE){
+						if(safeKing(whiteKing_x, whiteKing_y, WHITE))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					} else {
+						if(safeKing(blackKing_x, blackKing_y, BLACK))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					}
+					return false;
 				}
 			}
 		} else if(lin_final == lin-1){
@@ -138,13 +198,43 @@ namespace chess{
 				if(position[lin_final][col_final].empty || position[lin_final][col_final].color != position[lin][col].color){
 					position[lin_final][col_final] = position[lin][col];
 					position[lin][col].empty = true;
-					return true;
+					if(position[lin][col].color == WHITE){
+						if(safeKing(whiteKing_x, whiteKing_y, WHITE))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					} else {
+						if(safeKing(blackKing_x, blackKing_y, BLACK))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					}
+					return false;
 				}
 			} else if(col_final == col-2){
 				if(position[lin_final][col_final].empty || position[lin_final][col_final].color != position[lin][col].color){
 					position[lin_final][col_final] = position[lin][col];
 					position[lin][col].empty = true;
-					return true;
+					if(position[lin][col].color == WHITE){
+						if(safeKing(whiteKing_x, whiteKing_y, WHITE))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					} else {
+						if(safeKing(blackKing_x, blackKing_y, BLACK))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					}
+					return false;
 				}
 			}
 		} else if(lin_final == lin+2){
@@ -152,13 +242,43 @@ namespace chess{
 				if(position[lin_final][col_final].empty || position[lin_final][col_final].color != position[lin][col].color){
 					position[lin_final][col_final] = position[lin][col];
 					position[lin][col].empty = true;
-					return true;
+					if(position[lin][col].color == WHITE){
+						if(safeKing(whiteKing_x, whiteKing_y, WHITE))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					} else {
+						if(safeKing(blackKing_x, blackKing_y, BLACK))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					}
+					return false;
 				}
 			} else if(col_final == col-1){
 				if(position[lin_final][col_final].empty || position[lin_final][col_final].color != position[lin][col].color){
 					position[lin_final][col_final] = position[lin][col];
 					position[lin][col].empty = true;
-					return true;
+					if(position[lin][col].color == WHITE){
+						if(safeKing(whiteKing_x, whiteKing_y, WHITE))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					} else {
+						if(safeKing(blackKing_x, blackKing_y, BLACK))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					}
+					return false;
 				}
 			}
 		} else if(lin_final == lin-2){
@@ -166,13 +286,43 @@ namespace chess{
 				if(position[lin_final][col_final].empty || position[lin_final][col_final].color != position[lin][col].color){
 					position[lin_final][col_final] = position[lin][col];
 					position[lin][col].empty = true;
-					return true;
+					if(position[lin][col].color == WHITE){
+						if(safeKing(whiteKing_x, whiteKing_y, WHITE))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					} else {
+						if(safeKing(blackKing_x, blackKing_y, BLACK))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					}
+					return false;
 				}
 			} else if(col_final == col-1){
 				if(position[lin_final][col_final].empty || position[lin_final][col_final].color != position[lin][col].color){
 					position[lin_final][col_final] = position[lin][col];
 					position[lin][col].empty = true;
-					return true;
+					if(position[lin][col].color == WHITE){
+						if(safeKing(whiteKing_x, whiteKing_y, WHITE))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					} else {
+						if(safeKing(blackKing_x, blackKing_y, BLACK))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					}
+					return false;
 				}
 			}
 		}
@@ -198,7 +348,22 @@ namespace chess{
 				if(position[lin_final][col_final].empty || position[lin_final][col_final].color != position[lin][col].color){
 					position[lin_final][col_final] = position[lin][col];
 					position[lin][col].empty = true;
-					return true;
+					if(position[lin][col].color == WHITE){
+						if(safeKing(whiteKing_x, whiteKing_y, WHITE))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					} else {
+						if(safeKing(blackKing_x, blackKing_y, BLACK))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					}
+					return false;
 				}
 			} else if(lin_final < lin){
 				for(int p=lin-1;p>lin_final;p--)
@@ -207,7 +372,22 @@ namespace chess{
 				if(position[lin_final][col_final].empty || position[lin_final][col_final].color != position[lin][col].color){
 					position[lin_final][col_final] = position[lin][col];
 					position[lin][col].empty = true;
-					return true;
+					if(position[lin][col].color == WHITE){
+						if(safeKing(whiteKing_x, whiteKing_y, WHITE))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					} else {
+						if(safeKing(blackKing_x, blackKing_y, BLACK))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					}
+					return false;
 				}
 			}
 		} else if(lin_final == lin && col_final != col){
@@ -218,7 +398,22 @@ namespace chess{
 				if(position[lin_final][col_final].empty || position[lin_final][col_final].color != position[lin][col].color){
 					position[lin_final][col_final] = position[lin][col];
 					position[lin][col].empty = true;
-					return true;
+					if(position[lin][col].color == WHITE){
+						if(safeKing(whiteKing_x, whiteKing_y, WHITE))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					} else {
+						if(safeKing(blackKing_x, blackKing_y, BLACK))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					}
+					return false;
 				}
 			} else if(col_final < col){
 				for(int p=col-1;p>col_final;p--)
@@ -227,7 +422,22 @@ namespace chess{
 				if(position[lin_final][col_final].empty || position[lin_final][col_final].color != position[lin][col].color){
 					position[lin_final][col_final] = position[lin][col];
 					position[lin][col].empty = true;
-					return true;
+					if(position[lin][col].color == WHITE){
+						if(safeKing(whiteKing_x, whiteKing_y, WHITE))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					} else {
+						if(safeKing(blackKing_x, blackKing_y, BLACK))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					}
+					return false;
 				}
 			}
 		}
@@ -263,7 +473,22 @@ namespace chess{
 			if(position[lin_final][col_final].empty || position[lin_final][col_final].color != position[lin][col].color){
 				position[lin_final][col_final] = position[lin][col];
 				position[lin][col].empty = true;
-				return true;
+				if(position[lin][col].color == WHITE){
+					if(safeKing(whiteKing_x, whiteKing_y, WHITE))
+						return true;
+					else{
+						position[lin][col] = position[lin_final][col_final];
+						position[lin_final][col_final].empty = true;
+					}
+				} else {
+					if(safeKing(blackKing_x, blackKing_y, BLACK))
+						return true;
+					else{
+						position[lin][col] = position[lin_final][col_final];
+						position[lin_final][col_final].empty = true;
+					}
+				}
+				return false;
 			}
 		}
 		
@@ -274,7 +499,22 @@ namespace chess{
 			if(position[lin_final][col_final].empty || position[lin_final][col_final].color != position[lin][col].color){
 				position[lin_final][col_final] = position[lin][col];
 				position[lin][col].empty = true;
-				return true;
+				if(position[lin][col].color == WHITE){
+					if(safeKing(whiteKing_x, whiteKing_y, WHITE))
+						return true;
+					else{
+						position[lin][col] = position[lin_final][col_final];
+						position[lin_final][col_final].empty = true;
+					}
+				} else {
+					if(safeKing(blackKing_x, blackKing_y, BLACK))
+						return true;
+					else{
+						position[lin][col] = position[lin_final][col_final];
+						position[lin_final][col_final].empty = true;
+					}
+				}
+				return false;
 			}
 		}
 		
@@ -285,7 +525,22 @@ namespace chess{
 			if(position[lin_final][col_final].empty || position[lin_final][col_final].color != position[lin][col].color){
 				position[lin_final][col_final] = position[lin][col];
 				position[lin][col].empty = true;
-				return true;
+				if(position[lin][col].color == WHITE){
+					if(safeKing(whiteKing_x, whiteKing_y, WHITE))
+						return true;
+					else{
+						position[lin][col] = position[lin_final][col_final];
+						position[lin_final][col_final].empty = true;
+					}
+				} else {
+					if(safeKing(blackKing_x, blackKing_y, BLACK))
+						return true;
+					else{
+						position[lin][col] = position[lin_final][col_final];
+						position[lin_final][col_final].empty = true;
+					}
+				}
+				return false;
 			}
 		}
 		
@@ -296,7 +551,22 @@ namespace chess{
 			if(position[lin_final][col_final].empty || position[lin_final][col_final].color != position[lin][col].color){
 				position[lin_final][col_final] = position[lin][col];
 				position[lin][col].empty = true;
-				return true;
+				if(position[lin][col].color == WHITE){
+					if(safeKing(whiteKing_x, whiteKing_y, WHITE))
+						return true;
+					else{
+						position[lin][col] = position[lin_final][col_final];
+						position[lin_final][col_final].empty = true;
+					}
+				} else {
+					if(safeKing(blackKing_x, blackKing_y, BLACK))
+						return true;
+					else{
+						position[lin][col] = position[lin_final][col_final];
+						position[lin_final][col_final].empty = true;
+					}
+				}
+				return false;
 			}
 		}
 		
@@ -323,7 +593,22 @@ namespace chess{
 				if(position[lin_final][col_final].empty || position[lin_final][col_final].color != position[lin][col].color){
 					position[lin_final][col_final] = position[lin][col];
 					position[lin][col].empty = true;
-					return true;
+					if(position[lin][col].color == WHITE){
+						if(safeKing(whiteKing_x, whiteKing_y, WHITE))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					} else {
+						if(safeKing(blackKing_x, blackKing_y, BLACK))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					}
+					return false;
 				}
 			} else if(lin_final < lin){
 				for(int p=lin-1;p>lin_final;p--)
@@ -332,7 +617,22 @@ namespace chess{
 				if(position[lin_final][col_final].empty || position[lin_final][col_final].color != position[lin][col].color){
 					position[lin_final][col_final] = position[lin][col];
 					position[lin][col].empty = true;
-					return true;
+					if(position[lin][col].color == WHITE){
+						if(safeKing(whiteKing_x, whiteKing_y, WHITE))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					} else {
+						if(safeKing(blackKing_x, blackKing_y, BLACK))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					}
+					return false;
 				}
 			}
 		} else if(lin_final == lin && col_final != col){
@@ -343,7 +643,22 @@ namespace chess{
 				if(position[lin_final][col_final].empty || position[lin_final][col_final].color != position[lin][col].color){
 					position[lin_final][col_final] = position[lin][col];
 					position[lin][col].empty = true;
-					return true;
+					if(position[lin][col].color == WHITE){
+						if(safeKing(whiteKing_x, whiteKing_y, WHITE))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					} else {
+						if(safeKing(blackKing_x, blackKing_y, BLACK))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					}
+					return false;
 				}
 			} else if(col_final < col){
 				for(int p=col-1;p>col_final;p--)
@@ -352,7 +667,22 @@ namespace chess{
 				if(position[lin_final][col_final].empty || position[lin_final][col_final].color != position[lin][col].color){
 					position[lin_final][col_final] = position[lin][col];
 					position[lin][col].empty = true;
-					return true;
+					if(position[lin][col].color == WHITE){
+						if(safeKing(whiteKing_x, whiteKing_y, WHITE))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					} else {
+						if(safeKing(blackKing_x, blackKing_y, BLACK))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					}
+					return false;
 				}
 			}
 		}
@@ -372,7 +702,22 @@ namespace chess{
 			if(position[lin_final][col_final].empty || position[lin_final][col_final].color != position[lin][col].color){
 				position[lin_final][col_final] = position[lin][col];
 				position[lin][col].empty = true;
-				return true;
+				if(position[lin][col].color == WHITE){
+						if(safeKing(whiteKing_x, whiteKing_y, WHITE))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					} else {
+						if(safeKing(blackKing_x, blackKing_y, BLACK))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					}
+					return false;
 			}
 		}
 		
@@ -383,7 +728,22 @@ namespace chess{
 			if(position[lin_final][col_final].empty || position[lin_final][col_final].color != position[lin][col].color){
 				position[lin_final][col_final] = position[lin][col];
 				position[lin][col].empty = true;
-				return true;
+				if(position[lin][col].color == WHITE){
+						if(safeKing(whiteKing_x, whiteKing_y, WHITE))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					} else {
+						if(safeKing(blackKing_x, blackKing_y, BLACK))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					}
+					return false;
 			}
 		}
 		
@@ -394,7 +754,22 @@ namespace chess{
 			if(position[lin_final][col_final].empty || position[lin_final][col_final].color != position[lin][col].color){
 				position[lin_final][col_final] = position[lin][col];
 				position[lin][col].empty = true;
-				return true;
+				if(position[lin][col].color == WHITE){
+						if(safeKing(whiteKing_x, whiteKing_y, WHITE))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					} else {
+						if(safeKing(blackKing_x, blackKing_y, BLACK))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					}
+					return false;
 			}
 		}
 		
@@ -405,7 +780,22 @@ namespace chess{
 			if(position[lin_final][col_final].empty || position[lin_final][col_final].color != position[lin][col].color){
 				position[lin_final][col_final] = position[lin][col];
 				position[lin][col].empty = true;
-				return true;
+				if(position[lin][col].color == WHITE){
+						if(safeKing(whiteKing_x, whiteKing_y, WHITE))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					} else {
+						if(safeKing(blackKing_x, blackKing_y, BLACK))
+							return true;
+						else{
+							position[lin][col] = position[lin_final][col_final];
+							position[lin_final][col_final].empty = true;
+						}
+					}
+					return false;
 			}
 		}
 		
